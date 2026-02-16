@@ -9,5 +9,5 @@ def generate_summary(text):
         res.raise_for_status()
         return res.json().get('response', '').strip().replace('Resumen:', '').strip()
     except Exception as e:
-        print(f"❌ AI Error: {e}")
+        print(f"[ERROR] Fallo en inferencia IA: {e}")
         return None

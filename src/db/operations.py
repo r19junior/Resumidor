@@ -8,7 +8,7 @@ COL_SUM = os.getenv('SUMMARY_COLUMN', 'resumen')
 def init_db():
     with get_db_cursor(commit=True) as cur:
         cur.execute(f"ALTER TABLE {TABLE} ADD COLUMN IF NOT EXISTS {COL_SUM} TEXT;")
-        print(f"✅ DB Inicializada.")
+        print(f"[INFO] Verificación de esquema de base de datos completada.")
 
 def get_pending_docs(limit=10):
     with get_db_cursor() as cur:

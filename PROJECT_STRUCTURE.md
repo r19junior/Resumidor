@@ -1,51 +1,51 @@
-# 📂 Estructura del Proyecto y Fases de Desarrollo
+# Estructura del Proyecto y Fases de Desarrollo
 
 Este documento detalla la organización de carpetas y el cronograma de implementación para el proyecto **RESUMIDOR**.
 
-## 🏗️ Estructura de Carpetas
+## Estructura de Carpetas
 
 ```text
 RESUMIDOR/
-├── data/               # Almacenamiento local de PDFs (temporal o de prueba)
-├── logs/               # Archivos de registro para auditoría y errores
+├── data/               # Almacenamiento local de PDFs
+├── logs/               # Archivos de registro y auditoría
 ├── src/                # Código fuente del sistema
-│   ├── ai/             # Lógica de comunicación con Llama 3 (Ollama/API)
+│   ├── ai/             # Comunicación con modelos de lenguaje
 │   ├── db/             # Scripts de conexión y consultas PostgreSQL
-│   └── processor/      # Lógica de extracción de texto (PyMuPDF)
+│   └── processor/      # Lógica de extracción de texto
 ├── .env.example        # Plantilla de variables de entorno
-├── .gitignore          # Archivos excluidos de Git (logs, .env)
-├── main.py             # Punto de entrada principal (el Worker)
-├── README.md           # Documentación general
+├── .gitignore          # Archivos excluidos de control de versiones
+├── main.py             # Script de ejecución principal
+├── README.md           # Documentación técnica
 └── requirements.txt    # Dependencias del proyecto
 ```
 
 ---
 
-## 🚀 Fases del Proyecto
+## Fases del Proyecto
 
-### Fase 1: Cimiento y Datos 🏗️
+### Fase 1: Infraestructura de Datos
 - Configuración de la base de datos PostgreSQL.
 - Implementación de la creación dinámica de la columna `resumen`.
-- Script de conexión base en `src/db/`.
+- Desarrollo de scripts de conexión base.
 
-### Fase 2: Extracción de Contenido 📄
-- Integración de **PyMuPDF** para leer documentos.
-- Implementación del límite de 3 páginas para optimización.
-- Manejo de excepciones para PDFs sin capa de texto.
+### Fase 2: Procesamiento de Documentos
+- Integración de librería para lectura de PDFs.
+- Implementación de límites de lectura para optimización.
+- Manejo de excepciones en archivos sin capa de texto.
 
-### Fase 3: Integración de IA 🧠
-- Conexión con **Ollama** o API externa.
-- Refinamiento del *Prompt* para resúmenes de una sola línea.
-- Pruebas de inferencia en `src/ai/`.
+### Fase 3: Integración de Modelo de Lenguaje
+- Conexión con servicio de inferencia local o remoto.
+- Ajuste de instrucciones para generación de resúmenes concisos.
+- Pruebas de integración.
 
-### Fase 4: Orquestación (Worker) 🔄
-- Desarrollo del bucle principal en `main.py`.
-- Lógica de filtrado: procesar solo registros con `resumen IS NULL`.
-- Manejo de errores para evitar bloqueos en la cola.
+### Fase 4: Lógica de Negocio
+- Desarrollo del bucle de procesamiento principal.
+- Lógica de filtrado para registros pendientes.
+- Gestión de errores y continuidad del servicio.
 
-### Fase 5: Automatización y Monitoreo 📈
-- Configuración de la tarea cron para ejecución periódica.
-- Implementación de sistema de logs en `logs/`.
+### Fase 5: Automatización y Monitoreo
+- Configuración de tareas programadas para ejecución periódica.
+- Implementación de registro de eventos.
 
 ---
 
